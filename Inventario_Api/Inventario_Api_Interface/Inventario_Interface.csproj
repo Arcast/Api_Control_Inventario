@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Inventario_Api_DTO\Inventario_DTO.csproj" />
+    <ProjectReference Include="..\Inventario_Api_Entities\Inventario_Entities.csproj" />
+  </ItemGroup>
+
+</Project>
