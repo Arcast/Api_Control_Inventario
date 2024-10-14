@@ -13,5 +13,6 @@ namespace Inventario_Interface.Bodega
         Task<Guid> Save(BodegaDTO entity);
         Task<BodegaDTO> GetById(Guid Id);
         Task Modified(BodegaDTO entity);
+        Task<IEnumerable<BodegaDTO>> GetBodegas();
     }
 }

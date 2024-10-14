@@ -13,55 +13,31 @@ CREATE SCHEMA Inventario;
 CREATE TABLE Inventario.Bodega (
     BodegaId UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
     Nombre VARCHAR(100) NOT NULL,
-    Codigo VARCHAR(20)    
+    Codigo VARCHAR(20),
+	Estado bit
 );
 go
-
-CREATE TABLE Inventario.Proveedor (
-    ProveedorId UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
-    Nombre VARCHAR(100) NOT NULL,
-    Telefono VARCHAR(20),
-    Email VARCHAR(100),
-    Direccion VARCHAR(255)
-);
-go
-
-CREATE TABLE Inventario.Categoria (
-    CategoriaId UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
-    Nombre VARCHAR(100) NOT NULL,
-    Descripcion VARCHAR(255)
-);
 
 CREATE TABLE Inventario.Producto (
     ProductoId UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
-    Nombre VARCHAR(100) NOT NULL,
+    NombreProducto VARCHAR(100) NOT NULL,
     Descripcion VARCHAR(255),
-    Precio DECIMAL(10, 2) NOT NULL,
-    StockActual INT NOT NULL,
-    StockMinimo INT NOT NULL,
-    CategoriaId UNIQUEIDENTIFIER,
 	FechaCreacion datetime,
-	CreadoPor VARCHAR(100),
-	FechaModificacion datetime,
-	ModificadoPor VARCHAR(100),
-	CONSTRAINT FK_CategoriaID FOREIGN KEY (CategoriaId) REFERENCES Inventario.Categoria(CategoriaId)
+	CreadoPor VARCHAR(100)
 );
 go
 
 CREATE TABLE Inventario.MovimientoInventario (
-    MovimientoID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
-    ProductoID UNIQUEIDENTIFIER,
-    ProveedorID UNIQUEIDENTIFIER,
+    MovimientoId UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+    ProductoId UNIQUEIDENTIFIER,
+	BodegaId UNIQUEIDENTIFIER,
     TipoMovimiento VARCHAR(10),
     Cantidad INT NOT NULL,
+	Observaciones VARCHAR(255),
     FechaMovimiento DATE NOT NULL,
-    Observaciones VARCHAR(255),
-	FechaCreacion datetime,
 	CreadoPor VARCHAR(100),
-	FechaModificacion datetime,
-	ModificadoPor VARCHAR(100)
     CONSTRAINT FK_ProductoID FOREIGN KEY (ProductoId) REFERENCES Inventario.Producto(ProductoID),
-    CONSTRAINT FK_ProveedorID FOREIGN KEY (ProveedorId) REFERENCES Inventario.Proveedor(ProveedorID),
+	CONSTRAINT FK_BodegaID FOREIGN KEY (BodegaId) REFERENCES Inventario.Bodega(BodegaId),
 	CONSTRAINT CHK_TipoMovimiento CHECK (TipoMovimiento IN ('Entrada', 'Salida')),
 );
 

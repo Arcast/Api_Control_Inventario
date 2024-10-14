@@ -9,6 +9,7 @@ using Inventario_Api_Entities;
 using Inventario_Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
+using System.Data.Entity;
 
 namespace Inventario_Repository.Bodega
 {
@@ -23,7 +24,8 @@ namespace Inventario_Repository.Bodega
             BodegaEntities bodega = new BodegaEntities()
             {
                 Nombre = entity.Nombre,
-                Codigo = entity.Codigo
+                Codigo = entity.Codigo,
+                Estado = entity.Estado
             };           
 
             Create(bodega);
@@ -51,10 +53,24 @@ namespace Inventario_Repository.Bodega
 
             bodega.Nombre = entity.Nombre;
             bodega.Codigo = entity.Codigo;
+            bodega.Estado = entity.Estado;
 
             Update(bodega);
             await SaveAsync();        
         }
 
+        public async Task<IEnumerable<BodegaDTO>> GetBodegas()
+        {
+            IEnumerable<BodegaDTO> listaBodegas = FindAll().Select(a => new BodegaDTO()
+            {
+                BodegaId = a.BodegaId,
+                Nombre = a.Nombre,
+                Codigo = a.Codigo,
+                Estado = a.Estado
+            }).ToList();
+
+            return listaBodegas;
+
+        }
     }
 }

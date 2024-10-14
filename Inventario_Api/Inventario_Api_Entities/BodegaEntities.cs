@@ -15,6 +15,10 @@ namespace Inventario_Api_Entities
         public string Nombre { get; set; } 
 
         [Column("Codigo")]
-        public String Codigo { get; set; } 
+        public String Codigo { get; set; }
+
+        [Column("Estado")]
+        public bool Estado { get; set; }
+
     }
 }

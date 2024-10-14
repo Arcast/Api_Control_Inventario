@@ -44,19 +44,29 @@ namespace Api_Inventario.Controllers
         {
             try
             {
+
+                IEnumerable<BodegaDTO> listaBodegas = await _repository.BodegaRepository.GetBodegas();     
+                
+                int existe = (from a in listaBodegas where a.Nombre == bodega.Nombre select a).Count();
+
+                if (existe > 0)
+                {
+                    return BadRequest("El Nombre de la bodega que desea guardar ya existe");
+                }
+
                 var BodegaId = await _repository.BodegaRepository.Save(bodega);
                 return Ok(BodegaId);
             }
             catch (Exception ex)
             {
-                return BadRequest(bodega);
+                return BadRequest("Error al guardar bodega");
             }
         }
 
         /// <summary>
         /// Buscar bodega por Id.
         /// <returns>IdBodega</returns>
-        [HttpPost]
+        [HttpGet]
         [Route("BuscarPorId")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -101,6 +111,30 @@ namespace Api_Inventario.Controllers
                 return BadRequest();
             }
         }
+
+        /// <summary>
+        /// Mostrar lista de bodegas.
+        /// <returns>IdBodega</returns>
+        [HttpGet]
+        [Route("MostrarBodegas")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [SwaggerResponse(StatusCodes.Status200OK, "Mostrar Bodegas.")]
+        public async Task<ActionResult> MostrarBodegas()
+        {
+            try
+            {
+                IEnumerable<BodegaDTO> listaBodegas = await _repository.BodegaRepository.GetBodegas();
+
+                return Ok(listaBodegas);
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+        }
+
 
     }
 }
