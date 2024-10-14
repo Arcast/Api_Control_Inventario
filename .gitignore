@@ -36,7 +36,7 @@ $RECYCLE.BIN/
 ScaffoldingReadMe.txt
 
 # Configuration files
-appsettings*.json
+#appsettings*.json
 
 # Application Insights
 ApplicationInsights.config
@@ -46,3 +46,6 @@ Migrations/
 
 # IIS files
 [Ii][Nn][Ee][Tt][Pp][Uu][Bb]/
+
+#
+Inventario_Api/.vs/Inventario_Api/FileContentIndex/
