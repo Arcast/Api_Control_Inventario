@@ -75,7 +75,7 @@ namespace Api_Inventario.Controllers
         {
             try
             {
-                var Bodega = await _repository.BodegaRepository.GetById(Id);
+                BodegaDTO Bodega = await _repository.BodegaRepository.GetById(Id);
                 return Ok(Bodega);
             }
             catch (Exception ex)
