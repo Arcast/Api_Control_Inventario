@@ -16,7 +16,8 @@ namespace Inventario_Entities
         }
 
         // Here configure DbSets
-        public DbSet<BodegaEntities> Bodegas { get; set; }
+        public virtual DbSet<BodegaEntities> Bodegas { get; set; }
+        public virtual DbSet<ProductoEntities> Productos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

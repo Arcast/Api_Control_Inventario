@@ -40,7 +40,7 @@ namespace Api_Inventario.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [SwaggerResponse(StatusCodes.Status200OK, "Éxito al guardar Bodega.")]
-        public async Task<ActionResult> Guardar([FromQuery] BodegaDTO bodega)
+        public async Task<ActionResult> Guardar([FromBody] BodegaDTO bodega)
         {
             try
             {

@@ -9,7 +9,6 @@ using Inventario_Api_Entities;
 using Inventario_Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
-using System.Data.Entity;
 
 namespace Inventario_Repository.Bodega
 {
@@ -41,7 +40,8 @@ namespace Inventario_Repository.Bodega
             {
                 BodegaId = b.BodegaId,
                 Nombre = b.Nombre,
-                Codigo= b.Codigo
+                Codigo = b.Codigo,
+                Estado = b.Estado
             }).FirstOrDefaultAsync();
 
             return bodega;
@@ -61,13 +61,15 @@ namespace Inventario_Repository.Bodega
 
         public async Task<IEnumerable<BodegaDTO>> GetBodegas()
         {
-            IEnumerable<BodegaDTO> listaBodegas = FindAll().Select(a => new BodegaDTO()
+            IEnumerable<BodegaDTO> listaBodegas = new List<BodegaDTO>();
+
+            listaBodegas = await FindAll().Select(a => new BodegaDTO
             {
                 BodegaId = a.BodegaId,
                 Nombre = a.Nombre,
                 Codigo = a.Codigo,
                 Estado = a.Estado
-            }).ToList();
+            }).ToListAsync();
 
             return listaBodegas;
 
