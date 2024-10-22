@@ -1,4 +1,5 @@
 ﻿using Inventario_Interface.Bodega;
+using Inventario_Interface.MovimientoInventario;
 using Inventario_Interface.Producto;
 using System;
 using System.Collections.Generic;
@@ -12,5 +13,6 @@ namespace Inventario_Interface
     {
         IBodegaRepository BodegaRepository { get; }
         IProductoRepository ProductoRepository { get; }
+        IMovimientoInventarioRepository movimientoInventarioRepository { get; }
     }
 }

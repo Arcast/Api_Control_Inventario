@@ -49,10 +49,7 @@ namespace Api_Inventario.Controllers
                 
                 int existe = (from a in listaBodegas where a.Nombre == bodega.Nombre select a).Count();
 
-                if (existe > 0)
-                {
-                    return BadRequest("El Nombre de la bodega que desea guardar ya existe");
-                }
+                if (existe > 0) return BadRequest("El Nombre de la bodega que desea guardar ya existe");
 
                 var BodegaId = await _repository.BodegaRepository.Save(bodega);
                 return Ok(BodegaId);
@@ -98,10 +95,7 @@ namespace Api_Inventario.Controllers
             {
                 BodegaDTO bodegaDTO = await _repository.BodegaRepository.GetById(bodega.BodegaId);
 
-                if (bodegaDTO is null)
-                {
-                    return BadRequest("Id de bodega no encontrada");
-                }
+                if (bodegaDTO is null) return BadRequest("Id de bodega no encontrada");
 
                 await _repository.BodegaRepository.Modified(bodega);
                 return Ok("Modificado correctamente");

@@ -2,8 +2,10 @@
 using Inventario_Entities;
 using Inventario_Interface;
 using Inventario_Interface.Bodega;
+using Inventario_Interface.MovimientoInventario;
 using Inventario_Interface.Producto;
 using Inventario_Repository.Bodega;
+using Inventario_Repository.MovimientoInventario;
 using Inventario_Repository.Producto;
 using System;
 using System.Collections.Generic;
@@ -32,6 +34,11 @@ namespace Inventario_Repository
         public IProductoRepository ProductoRepository
         {
             get { return Get<ProductoRepository>(); }
+        }
+
+        public IMovimientoInventarioRepository movimientoInventarioRepository
+        {
+            get { return Get<MovimientoInventarioRepository>(); }
         }
 
         private T Get<T>()

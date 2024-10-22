@@ -1,9 +1,11 @@
 using Inventario_Entities;
 using Inventario_Interface;
 using Inventario_Interface.Bodega;
+using Inventario_Interface.MovimientoInventario;
 using Inventario_Interface.Producto;
 using Inventario_Repository;
 using Inventario_Repository.Bodega;
+using Inventario_Repository.MovimientoInventario;
 using Inventario_Repository.Producto;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,6 +19,7 @@ builder.Services.AddDbContext<RepositoryContext>(options =>
 builder.Services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
 builder.Services.AddScoped<IBodegaRepository, BodegaRepository>();
 builder.Services.AddScoped<IProductoRepository, ProductoRepository>();
+builder.Services.AddScoped<IMovimientoInventarioRepository, MovimientoInventarioRepository>();
 
 // Add services to the container.
 builder.Services.AddControllers();

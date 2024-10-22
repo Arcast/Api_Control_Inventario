@@ -43,10 +43,7 @@ namespace Api_Inventario.Controllers
 
                 int existe = (from a in ListaProductos where a.NombreProducto == producto.NombreProducto select a).Count();
 
-                if (existe > 0)
-                {
-                    return BadRequest("El Nombre del producto que desea guardar ya existe");
-                }
+                if (existe > 0) return BadRequest("El Nombre del producto que desea guardar ya existe");
 
                 var ProductoId = await _repository.ProductoRepository.Save(producto);
                 return Ok(ProductoId);
@@ -92,10 +89,7 @@ namespace Api_Inventario.Controllers
             {
                 ProductoDTO productoDTO = await _repository.ProductoRepository.GetById(producto.ProductoId);
 
-                if (productoDTO is null)
-                {
-                    return BadRequest("Id de producto no encontrada");
-                }
+                if (productoDTO is null) return BadRequest("Id de producto no encontrada");
 
                 await _repository.ProductoRepository.Modified(producto);
                 return Ok("Modificado correctamente");
