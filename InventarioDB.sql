@@ -3,7 +3,6 @@
 
 Create database Control_Inventario;
 go
-
 use Control_Inventario;
 go
 
@@ -32,9 +31,9 @@ CREATE TABLE Inventario.MovimientoInventario (
     ProductoId UNIQUEIDENTIFIER,
 	BodegaId UNIQUEIDENTIFIER,
     TipoMovimiento VARCHAR(10),
-    Cantidad INT NOT NULL,
+    Cantidad decimal(18,2) NOT NULL,
 	Observaciones VARCHAR(255),
-    FechaMovimiento DATE NOT NULL,
+    FechaMovimiento DATETIME,
 	CreadoPor VARCHAR(100),
     CONSTRAINT FK_ProductoID FOREIGN KEY (ProductoId) REFERENCES Inventario.Producto(ProductoID),
 	CONSTRAINT FK_BodegaID FOREIGN KEY (BodegaId) REFERENCES Inventario.Bodega(BodegaId),
